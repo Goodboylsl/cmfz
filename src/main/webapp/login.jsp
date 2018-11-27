@@ -8,8 +8,8 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     
 	<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
-	<link rel="stylesheet" href="css/common.css" type="text/css"/>
-	<link rel="stylesheet" href="css/login.css" type="text/css"/>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css" type="text/css"/>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css" type="text/css"/>
 	<script type="text/javascript" src="script/jquery.js"></script>
 	<script type="text/javascript" src="script/common.js"></script>
 	<script type="text/javascript">
@@ -17,13 +17,18 @@
 		$(function(){
 			//点击更换验证码：
 			$("#captchaImage").click(function(){//点击更换验证码
-				alert("自己做");
+			    var time = new Date();
+			    //alert(time)
+
+			    $("#captchaImage").prop("src","${pageContext.request.contextPath}/kaptcha/getKaptcha?a="+time);
+				//alert("自己做");
 			});
 			
 			//  form 表单提交
 			$("#loginForm").bind("submit",function(){
-				alert("自己做");
-				return false;
+				$("#loginForm").prop("action","${pageContext.request.contextPath}/user/login");
+				alert(123123)
+				//return false;
 			});
 		});
 	</script>
@@ -31,7 +36,7 @@
 <body>
 	
 		<div class="login">
-			<form id="loginForm" action="../back/index.html" method="post" >
+			<form id="loginForm" method="post" >
 				
 				<table>
 					<tbody>
@@ -43,7 +48,7 @@
 								用户名:
 							</th>
 							<td>
-								<input type="text"  name="user.name" class="text" value="xxx" maxlength="20"/>
+								<input type="text"  name="username" class="text" maxlength="20"/>
 							</td>
 					  </tr>
 					  <tr>
@@ -51,7 +56,7 @@
 								密&nbsp;&nbsp;&nbsp;码:
 							</th>
 							<td>
-								<input type="password" name="user.password" class="text" value="xxx" maxlength="20" autocomplete="off"/>
+								<input type="password" name="password" class="text" maxlength="20" autocomplete="off"/>
 							</td>
 					  </tr>
 					
@@ -60,7 +65,7 @@
 							<th>验证码:</th>
 							<td>
 								<input type="text" id="enCode" name="enCode" class="text captcha" maxlength="4" autocomplete="off"/>
-								<img id="captchaImage" class="captchaImage" src="img/captcha.jpg" title="点击更换验证码"/>
+								<img id="captchaImage" class="captchaImage" src="img/captcha.jpg" title="点击更换验证码" name="passwords"/>
 							</td>
 						</tr>					
 					<tr>

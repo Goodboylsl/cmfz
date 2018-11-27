@@ -23,7 +23,7 @@ public class UserController {
 		//&& ((String)session.getAttribute("kaptcha")).equalsIgnoreCase(passwords)
 		if(u != null){
 			session.setAttribute("u",u);
-			return "forward:/main/main.jsp";
+			return "forward:/menu/showAllByMenu";
 		}else {
 			return "login";
 		}

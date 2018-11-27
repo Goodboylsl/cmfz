@@ -1,4 +1,5 @@
 ﻿<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,6 +12,20 @@
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript">
 	<!--菜单处理-->
+    $(function () {
+        $("#tabs").tabs({
+            title:'New Tab',
+            content:'Tab Body',
+            closable:true,
+            tools:[{
+                iconCls:'icon-mini-refresh',
+                handler:function(){
+                    alert('refresh');
+                }
+            }]
+        })
+        
+    })
 </script>
 
 </head>
@@ -21,21 +36,29 @@
     </div>   
     <div data-options="region:'south',split:true" style="height: 40px;background: #5C160C">
     	<div style="text-align: center;font-size:15px; color: #FAF7F7;font-family: 楷体" >&copy;百知教育 htf@zparkhr.com.cn</div>
-    </div>   
-       
-    <div data-options="region:'west',title:'导航菜单',split:true" style="width:220px;">
+    </div>
+    <div data-options="region:'west',title:'目录导航',split:true" style="width:220px;">
+        <c:forEach items="${requestScope.menus}" var="mu">
+            <div id="aa" class="easyui-accordion">
+                <div id="tabs" title="${mu.title}" data-options="iconCls:'icon-save'" style="overflow:auto;padding:10px;">
+                    <c:forEach items="${mu.menuList}" var="mus">
+                        <a href="#">
+                            <span><img src="../img/${mus.iconCls}"/>
+                                ${mus.title}
+                            </span>
+                        </a>
+                    </c:forEach>
+                </div>
+            </div>
+        </c:forEach>
 
-    	<div id="aa" class="easyui-accordion" data-options="fit:true">
-    		
-		</div>
-
-    </div>   
+    </div>
     <div data-options="region:'center'">
-    	<div id="tt" class="easyui-tabs" data-options="fit:true,narrow:true,pill:true">   
-		    <div title="主页" data-options="iconCls:'icon-neighbourhood',"  style="background-image:url(image/shouye.jpg);background-repeat: no-repeat;background-size:100% 100%;">
+        <div id="tt" class="easyui-tabs" data-options="fit:true,narrow:true,pill:true">
+            <div title="主页" data-options="iconCls:'icon-neighbourhood',"  style="background-image:url(image/shouye.jpg);background-repeat: no-repeat;background-size:100% 100%;">
                 <img src="../img/shouye.jpg"/>
             </div>
-		</div>  
-    </div>   
+        </div>
+    </div>
 </body> 
 </html>

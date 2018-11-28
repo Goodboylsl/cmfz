@@ -23,6 +23,10 @@ public class CmfzApplication {
 	}
 
 
+	/**
+	 * Json解析工具:fastJson的工厂对象配置
+	 * @return
+	 */
 	@Bean
 	public HttpMessageConverters fastJsonHttpMessageConverters() {
 		FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();
@@ -33,6 +37,10 @@ public class CmfzApplication {
 		return new HttpMessageConverters(converter);
 	}
 
+	/**
+	 * google验证码的工厂对象
+	 * @return
+	 */
 	@Bean
 	public DefaultKaptcha getKaptchaBean() {
 		DefaultKaptcha defaultKaptcha = new DefaultKaptcha();
